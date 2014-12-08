@@ -1,51 +1,71 @@
 body {
     background: #2B3A42;
     font-family: sans-serif;
+    margin-bottom: 120px;
 
     * {
-    	box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    button {
+        background: #3F5765;
+        text-transform: uppercase;
+        color: #ffffff;
+    }
+
+    button, input[type="text"] {
+        border: 0 none;
+        text-align: center;
+        vertical-align: top;
+        font-size: 26px;
+        padding: 20px 45px;
+        display: block;
+        width: 100%;
+
     }
 }
 
-button:hover {
-    cursor: pointer;
-}
-ul li {
-    list-style: none;
-}
-
 .tagLists {
-	li {
-		display: inline-block;
-		padding: 5px 10px;
-		background: #ccc;
-		margin: 5px;
-	}
+    li {
+        display: inline-block;
+        padding: 5px 10px;
+        background: #ccc;
+        margin: 5px;
+        cursor: pointer;
+    }
 
-	.selected li {
-	    background: #ebebeb
-	}
+    .selected li {
+        background: #ebebeb
+    }
 }
 
-#results { 
+#results {
     margin: 15px auto;
     max-width: 1280px;
     text-align: center;
 
-	a {
-	    display: inline-block;
+    a {
+        display: inline-block;
 
-	    img {
-		    margin: 15px;
-		    height: 200px;
-		    /*background: url('../img/ajax-loader.gif') no-repeat center center;*/
-		    box-shadow: 0px 3px 3px rgba(33, 33, 33, 0.3);
-		}
-	}
+        img {
+            margin: 15px;
+            height: 200px;
+            /*background: url('../img/ajax-loader.gif') no-repeat center center;*/
+            box-shadow: 0px 3px 3px rgba(33, 33, 33, 0.3);
+        }
+    }
 }
 
 .shadowbox {
-	display: none;
+    display: none;
     margin: 35px auto;
     width: 960px;
     min-height: 480px;
@@ -60,51 +80,51 @@ ul li {
     text-align: center;
 
 
-	.shadowbox-nav {
-	    position: absolute;
-	    top: 400px;
-	    padding: 10px;
-	    color: #efefef;
-	    font-size: 30px;
-	    font-weight: 700;
-	    background: #3f5765;
-	    border: none;
-	    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
-	}
+    .shadowbox-nav {
+        position: absolute;
+        top: 400px;
+        padding: 10px;
+        color: #efefef;
+        font-size: 30px;
+        font-weight: 700;
+        background: #3f5765;
+        border: none;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+    }
 
-	#prev {
-	    left: -15px;
-	}
+    #prev {
+        left: -15px;
+    }
 
-	#next {
-	    right: -15px;
-	}
+    #next {
+        right: -15px;
+    }
 
-	#exit-shadowbox {
-	    position: absolute;
-	    top: 0;
-	    right: 0;
-	    padding: 5px 10px;
-	    background: none;
-	    border: none;
-	}
+    #exit-shadowbox {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 10px;
+        background: none;
+        border: none;
+    }
 
-	img {
-	    max-height: 640px;
-	    max-width: 100%;
-	    /*background: url('../img/ajax-loader.gif') no-repeat center center;*/
-	}
+    img {
+        max-height: 640px;
+        max-width: 100%;
+        /*background: url('../img/ajax-loader.gif') no-repeat center center;*/
+    }
 }
 
 #albumImages {
-	li, a {
-	    display: inline-block;
-	}
+    li, a {
+        display: inline-block;
+    }
 
-	img {
-	    height: 80px;
-	    margin: 0 5px;
-	}
+    img {
+        height: 80px;
+        margin: 0 5px;
+    }
 }
 
 .controls {
@@ -112,49 +132,32 @@ ul li {
     text-align: center;
 
      p {
-	    text-align: center;
-	    margin: 35px auto;
-	    color: #3F5765;
-	    bottom: 35px;
-	    left: 0;
-	    right: 0;
-	}
+        text-align: center;
+        margin: 35px auto;
+        color: #3F5765;
+        bottom: 35px;
+        left: 0;
+        right: 0;
+    }
 
-	#load-more {
-		position: fixed;
-		bottom: 0;
-	}
+    #load-more {
+        position: fixed;
+        bottom: 0;
+    }
 
-	#submit {
-    	display: inline-block;
-	}
-}
-
-button {
-    background: #3F5765;
-    text-transform: uppercase;
-    color: #ffffff;
-}
-
-button, input[type="text"] {
-    border: 0 none;
-    text-align: center;
-    vertical-align: top;
-    font-size: 26px;
-    padding: 20px 45px;
-	display: block;
-	width: 100%;
-
+    #submit {
+        display: inline-block;
+    }
 }
 
 /**START RESPONSIVE BEHAVIOUR**/
 @media screen and (max-width: 960px) {
     #results {
-    	a {
-    		img {
-		        height: 120px;
-		        margin: 5px;
-		    }
-		}	
-	}
+        a {
+            img {
+                height: 120px;
+                margin: 5px;
+            }
+        }
+    }
 }
