@@ -1,0 +1,51 @@
+.shadowbox {
+    display: none;
+    margin: 35px auto;
+    width: 960px;
+    min-height: 480px;
+    background: #EFEFEF;
+    border: 1px solid #BDD4DE;
+    padding: 15px;
+    position: fixed;
+    left:0;
+    right:0;
+    top: 10%;
+    margin: auto;
+    text-align: center;
+
+
+    .shadowbox-nav {
+        position: absolute;
+        top: 400px;
+        padding: 10px;
+        color: #efefef;
+        font-size: 30px;
+        font-weight: 700;
+        background: #3f5765;
+        border: none;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    #prev {
+        left: -15px;
+    }
+
+    #next {
+        right: -15px;
+    }
+
+    #exit-shadowbox {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 10px;
+        background: none;
+        border: none;
+    }
+
+    img {
+        max-height: 640px;
+        max-width: 100%;
+        /*background: url('../img/ajax-loader.gif') no-repeat center center;*/
+    }
+}

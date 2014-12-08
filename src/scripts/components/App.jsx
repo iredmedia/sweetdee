@@ -5,66 +5,13 @@
 'use strict';
 
 var React = require('react/addons');
+var Tags = require('./Tags.jsx');
 
 // var ImageBox = require('./ImageBox');
 
 // CSS
 require('../../styles/reset.css');
-require('../../styles/app.less');
-
-// Contains SEARCHED tag list and SELECTED tag list
-var Tags = React.createClass({
-    getInitialState: function () {
-        return {
-            selected: []
-        }
-    },
-    addTag: function (e) {
-        var tag = e.target.innerText;
-        var selectedTags = this.state.selected;
-
-        if (selectedTags.indexOf(tag) > -1) return;
-
-        selectedTags = selectedTags.concat(tag);
-
-        this.setState({
-            'selected': selectedTags
-        });
-
-        this.props.onAddTag(selectedTags.join('+'));
-    },
-    removeTag: function (e){
-        var tags = this.state.selected;
-
-        // Splice the clicked value out
-        tags.splice(this.state.selected.indexOf(e.target.innerText) , 1);
-
-        // Update components tag list
-        this.setState({
-            'selected':  tags
-        });
-    },
-    render: function () {
-        var tagItem = function (tag) {
-               return (<li key={tag.name} onClick={this.addTag}>{tag.name}</li>);
-        }
-        var selectedItem = function (name, i) {
-               return (<li key={name + i} onClick={this.removeTag}>{name}</li>);
-        }
-
-        return (
-            <div className={'tagLists'}>
-                <ul className={"tags"}>
-                    {this.props.tags.map(tagItem, this)}
-                </ul>
-
-                <ul className={'selected'}>
-                    {this.state.selected.map(selectedItem, this)}
-                </ul>
-            </div>
-        );
-    }
-});
+require('../../styles/components/App.less');
 
 var App = React.createClass({
     getInitialState: function() {
@@ -109,8 +56,10 @@ var App = React.createClass({
         });
     },
 
-    getMulti: function (query) {
-        this.addSelected(query);
+    // Retrieves
+    getMulti: function (query, isLoadMore) {
+        if (!isLoadMore) this.addSelected(query); // Action is
+
         var fn = function (response) {
             // Get IMGUR images ONLY.
             var imgList = [];
@@ -128,6 +77,9 @@ var App = React.createClass({
 
                     // Check for gallery/albums
                     if (src.indexOf('/gallery/') >= 0 || src.indexOf('/a/') >= 0 ) {
+
+                        console.log("GET imgur album thumbnail (first image in return of album)");
+
                         // Get Gallery IMAGES
                         imgList.push({
                             "url": src,
@@ -140,6 +92,8 @@ var App = React.createClass({
 
                     // Check for an IMAGE
                     if (src.lastIndexOf('.') >= src.length - 8){
+                        if (src.indexOf('gifv') >= 0) return;
+
                         // placeMedia(src, alt);
                         imgList.push({
                             "url": src,
@@ -172,6 +126,7 @@ var App = React.createClass({
         reddit.hot(query).limit(25).after(this.state.next).fetch(fn);
     },
 
+    // Submit a new SEARCH for subreddits
     subredditSearch: function() {
         // If no request for tags, return
         if ( !this.state.query ) return;
@@ -184,17 +139,21 @@ var App = React.createClass({
         }.bind(this))
     },
 
+    // Do some keyboard action while in search
     onKeyUp: function (event) {
-        console.log(event.which)
-
         // Enter key
         if (event.which === 13) {
             this.subredditSearch();
         }
     },
 
+    // Attached to loadmore button, triggers a "NEXT/AFTER" operation to load more based on current set of tags
     onLoadMore: function () {
-        this.getMulti(this.state.selected)
+        this.getMulti(this.state.selected, true)
+    },
+
+    openPreview: function (argument) {
+        console.log(argument)
     },
 
     render: function() {
@@ -202,11 +161,11 @@ var App = React.createClass({
 
         var renderResult = function (result) {
             return (
-                <a key={index++}>
+                <a onClick={this.openPreview} key={index++}>
                     <img src={result.url} alt={result.alt} />
                 </a>
             )
-        }
+        }.bind(this)
 
         return (<div>
             <div className="controls">
@@ -214,7 +173,7 @@ var App = React.createClass({
 
                 <button onClick={this.subredditSearch} id="submit">Search</button>
 
-                <Tags onAddTag={this.getMulti} tags={this.state.tags} />
+                <Tags onAddTag={this.getMulti} tags={this.state.tags} selected={this.state.selected} />
 
                 <button id="load-more" onClick={this.onLoadMore}>Load More</button>
 

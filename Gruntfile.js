@@ -29,7 +29,7 @@ module.exports = function (grunt) {
     test: /\.png/,
     loader: 'url-loader?limit=10000&minetype=image/png'
   }, {
-    test: /\.js$/,
+    test: /\.jsx$/,
     loader: 'jsx-loader'
   }];
 
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
     pkg: pkgConfig,
     webpack: {
       development: {
-        entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.js',
+        entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.jsx',
         output: {
           path: '<%= pkg.src %>/scripts/',
           filename: '<%= pkg.mainOutput %>.js'
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         }),
         module: {
           preLoaders: [{
-            test: '\\.js$',
+            test: '\\.jsx$',
             exclude: 'node_modules',
             loader: 'jshint'
           }],
@@ -64,10 +64,10 @@ module.exports = function (grunt) {
     },
     watch: {
       webpack: {
-        files: ['<%= pkg.src %>/scripts/{,*/}*.js',
+        files: ['<%= pkg.src %>/scripts/{,*/}*.js*',
           '<%= pkg.src %>/styles/{,*/}*.css',
           '<%= pkg.src %>/styles/{,*/}*.less',
-          '!<%= pkg.src %>/scripts/<%= pkg.mainOutput %>.js'
+          '!<%= pkg.src %>/scripts/<%= pkg.mainOutput %>.js*'
         ],
         tasks: ['webpack:development']
       },
